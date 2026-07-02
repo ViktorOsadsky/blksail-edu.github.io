@@ -47,6 +47,14 @@ Yolo trains on examples of bounding boxes, or boxes around your object, to learn
 
 ### Roboflow
 
+Roboflow is an online computer vision platform. On it, you can:
+- Annotate Data
+- Train Models
+- Preprocess Datasets
+- Work with Teams
+
+We will be using Roboflow for the data annotation and preprocessing. For training, we will be using Ultralytics, a package that provides many pre-trained versions of YOLO.
+
 Open Roboflow and create a new account:
 
 [https://roboflow.com/annotate](https://roboflow.com/annotate)
@@ -441,5 +449,30 @@ YOLO predicts outputs in pixel positions, not the normalized coordinates.
 ### Problem 1: Run on RPI
 
 
-Run the model you just trained on your RPI!
+Get your model to run locally on your RPI.
+
+To install Ultralytics, ensure you only use the necessary packages.
+
+1. Download your trained YOLO model from Colab.
+`Files -> Right click on best.pt -> Download`
+2. Host your model files and an example image on GitHub.
+`Make a new repo -> Upload best.pt -> Upload a squirrel test image`
+3. On the RPI, create a new virtual environment for object detection (make sure you are in your user):
+```python
+mkvirtualenv object-detection
+workon object-detection
+```
+4. Clone your repo.
+```python
+git clone <repo link>
+```
+5. Inside the virtual environment, run the following commands:
+```python
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+pip install ultralytics --no-deps
+pip install opencv-python-headless pillow pyyaml requests tqdm psutil numpy matplotlib nvidia-ml-py opencv-python polars ultralytics-thop
+```
+6. Create a new python script to run YOLO.
+7. Get your YOLO model to predict on your testing image.
+
 
